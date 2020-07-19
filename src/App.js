@@ -1,6 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import QuoteCard from "./QuoteCard";
 
 function App() {
 	const [quotes, setQuotes] = useState([]);
@@ -29,33 +30,40 @@ function App() {
 
 	return (
 		<div className="App">
-			{loading ? (
-				<p>Loading...</p>
-			) : (
+			{quotes[index] ? <QuoteCard quote={quotes[index]} /> : null}
+
+			{!loading ? (
 				<>
-					{quotes[index] ? (
-						<>
-							<p>{quotes[index].content}</p>
-							<p>{quotes[index].author}</p>
-							<p>{index}</p>
-						</>
-					) : (
-						<p>{loading}</p>
-					)}
 					<button
-						disabled={index === 0 ? true : false}
+						type="button"
+						className="btn btn-primary"
+						disabled={index === 0}
 						onClick={() => setIndex(index - 1)}
 					>
 						Prev
 					</button>
-					<button onClick={fetchQuote}>Get New Quote</button>
+
 					<button
-						disabled={index === quotes.length - 1 ? true : false}
+						type="button"
+						className="btn btn-primary"
+						onClick={fetchQuote}
+					>
+						Get New Quote
+					</button>
+
+					<button
+						type="button"
+						className="btn btn-primary"
+						disabled={index === quotes.length - 1}
 						onClick={() => setIndex(index + 1)}
 					>
 						Next
 					</button>
 				</>
+			) : (
+				<button type="button" className="btn btn-primary">
+					Loading...
+				</button>
 			)}
 		</div>
 	);
