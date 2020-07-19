@@ -2,6 +2,7 @@
 
 .App {
 	text-align: center;
+	margin-top: 5rem;
 }
 
 .quote-card {
@@ -17,6 +18,10 @@
 }
 
 @media only screen and (max-width: 600px) {
+	.App {
+		margin-top: 0;
+	}
+
 	.quote-card {
 		width: fit-content;
 	}

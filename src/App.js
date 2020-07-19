@@ -30,41 +30,48 @@ function App() {
 
 	return (
 		<div className="App">
-			{quotes[index] ? <QuoteCard quote={quotes[index]} /> : null}
-
-			{!loading ? (
+			{quotes[index] ? (
 				<>
-					<button
-						type="button"
-						className="btn btn-primary"
-						disabled={index === 0}
-						onClick={() => setIndex(index - 1)}
-					>
-						Prev
-					</button>
+					<QuoteCard quote={quotes[index]} />
 
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={fetchQuote}
-					>
-						Get New Quote
-					</button>
+					{!loading ? (
+						<>
+							{index === 0 ? null : (
+								<button
+									type="button"
+									className="btn btn-primary"
+									disabled={index === 0}
+									onClick={() => setIndex(index - 1)}
+								>
+									Prev
+								</button>
+							)}
 
-					<button
-						type="button"
-						className="btn btn-primary"
-						disabled={index === quotes.length - 1}
-						onClick={() => setIndex(index + 1)}
-					>
-						Next
-					</button>
+							<button
+								type="button"
+								className="btn btn-primary"
+								onClick={fetchQuote}
+							>
+								Get New Quote
+							</button>
+
+							{index === quotes.length - 1 ? null : (
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={() => setIndex(index + 1)}
+								>
+									Next
+								</button>
+							)}
+						</>
+					) : (
+						<button type="button" className="btn btn-primary">
+							Loading...
+						</button>
+					)}
 				</>
-			) : (
-				<button type="button" className="btn btn-primary">
-					Loading...
-				</button>
-			)}
+			) : null}
 		</div>
 	);
 }
