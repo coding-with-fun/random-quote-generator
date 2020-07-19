@@ -66,7 +66,7 @@ function App() {
 							)}
 						</>
 					) : (
-						<button type="button" className="btn btn-primary">
+						<button disabled type="button" className="btn btn-primary">
 							Loading...
 						</button>
 					)}
