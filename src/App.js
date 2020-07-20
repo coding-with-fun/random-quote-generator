@@ -2,24 +2,31 @@ import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import QuoteCard from "./QuoteCard";
+import ErrorCard from "./ErrorCard";
 
 function App() {
 	const [quotes, setQuotes] = useState([]);
-	const [loading, setLoading] = useState(false);
 	const [index, setIndex] = useState(quotes.length);
+	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState(false);
 
 	const fetchQuote = async () => {
 		setLoading(true);
 		const data = await Axios.get("https://api.quotable.io/random");
 
-		setQuotes([
-			...quotes,
-			{
-				author: data.data.author,
-				content: data.data.content,
-			},
-		]);
-		setIndex(quotes.length);
+		if (data.data.author) {
+			setError(false);
+			setQuotes([
+				...quotes,
+				{
+					author: data.data.author,
+					content: data.data.content,
+				},
+			]);
+			setIndex(quotes.length);
+		} else {
+			setError(true);
+		}
 		setLoading(false);
 	};
 
@@ -30,45 +37,50 @@ function App() {
 
 	return (
 		<div className="App">
-			{quotes[index] && (
+			{error ? (
+				<ErrorCard errrorMessage="Please check your Internet Connection!!" />
+			) : (
 				<>
-					<QuoteCard quote={quotes[index]} />
-
-					{!loading ? (
+					{quotes[index] && (
 						<>
-							{index === 0 ? null : (
-								<button
-									type="button"
-									className="btn btn-light"
-									disabled={index === 0}
-									onClick={() => setIndex(index - 1)}
-								>
-									Prev
-								</button>
-							)}
+							<QuoteCard quote={quotes[index]} />
+							{!loading ? (
+								<>
+									{index === 0 ? null : (
+										<button
+											type="button"
+											className="btn btn-light"
+											disabled={index === 0}
+											onClick={() => setIndex(index - 1)}
+										>
+											Prev
+										</button>
+									)}
 
-							<button
-								type="button"
-								className="btn btn-light"
-								onClick={fetchQuote}
-							>
-								Get New Quote
-							</button>
+									<button
+										type="button"
+										className="btn btn-light"
+										onClick={fetchQuote}
+									>
+										Get New Quote
+									</button>
 
-							{index === quotes.length - 1 ? null : (
-								<button
-									type="button"
-									className="btn btn-light"
-									onClick={() => setIndex(index + 1)}
-								>
-									Next
+									{index === quotes.length - 1 ? null : (
+										<button
+											type="button"
+											className="btn btn-light"
+											onClick={() => setIndex(index + 1)}
+										>
+											Next
+										</button>
+									)}
+								</>
+							) : (
+								<button disabled type="button" className="btn btn-light">
+									Loading...
 								</button>
 							)}
 						</>
-					) : (
-						<button disabled type="button" className="btn btn-light">
-							Loading...
-						</button>
 					)}
 				</>
 			)}
