@@ -1,8 +1,14 @@
 {
   "short_name": "Wise Words",
   "name": "Wise Words",
-  "icons": [{
-    "src": "/images/maskable_logo.png",
+  "icons": [
+    {
+      "src": "/images/logo.png",
+      "type": "image/png",
+      "sizes": "1024x1024"
+    },
+    {
+    "src": "/images/logo.png",
     "type": "image/png",
     "sizes": "1024x1024",
     "purpose": "maskable"
