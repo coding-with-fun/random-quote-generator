@@ -1,4 +1,20 @@
-@import url("https://fonts.googleapis.com/css2?family=Courgette&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+
+html {
+	min-height: 100%;
+}
+
+body {
+	margin: 0;
+	min-height: 100%;
+
+	background: #0f2027;
+	background: -webkit-linear-gradient(to right, #2c5364, #203a43, #0f2027);
+	background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
+
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
 
 .App {
 	text-align: center;
@@ -9,12 +25,12 @@
 	width: 40rem;
 	padding: 30px;
 	text-align: left;
-	font-family: "Courgette", cursive;
+	font-family: "Open Sans", sans-serif;
 }
 
 .btn {
-  margin: 4px;
-  margin-bottom: 40pt;
+	margin: 4px;
+	margin-bottom: 40pt;
 }
 
 @media only screen and (max-width: 600px) {

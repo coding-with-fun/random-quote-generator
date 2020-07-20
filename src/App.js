@@ -30,7 +30,7 @@ function App() {
 
 	return (
 		<div className="App">
-			{quotes[index] ? (
+			{quotes[index] && (
 				<>
 					<QuoteCard quote={quotes[index]} />
 
@@ -39,7 +39,7 @@ function App() {
 							{index === 0 ? null : (
 								<button
 									type="button"
-									className="btn btn-primary"
+									className="btn btn-light"
 									disabled={index === 0}
 									onClick={() => setIndex(index - 1)}
 								>
@@ -49,7 +49,7 @@ function App() {
 
 							<button
 								type="button"
-								className="btn btn-primary"
+								className="btn btn-light"
 								onClick={fetchQuote}
 							>
 								Get New Quote
@@ -58,7 +58,7 @@ function App() {
 							{index === quotes.length - 1 ? null : (
 								<button
 									type="button"
-									className="btn btn-primary"
+									className="btn btn-light"
 									onClick={() => setIndex(index + 1)}
 								>
 									Next
@@ -66,12 +66,12 @@ function App() {
 							)}
 						</>
 					) : (
-						<button disabled type="button" className="btn btn-primary">
+						<button disabled type="button" className="btn btn-light">
 							Loading...
 						</button>
 					)}
 				</>
-			) : null}
+			)}
 		</div>
 	);
 }
